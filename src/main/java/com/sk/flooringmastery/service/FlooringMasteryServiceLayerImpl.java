@@ -8,6 +8,7 @@ import com.sk.flooringmastery.dao.FlooringMasteryTaxDao;
 import com.sk.flooringmastery.dto.Order;
 import com.sk.flooringmastery.dto.Product;
 import com.sk.flooringmastery.dto.Tax;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_DOWN;
 import static java.math.RoundingMode.HALF_UP;
@@ -34,6 +35,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
             throw new FMPersistenceException("You must Enter a Customer Name!");
         } else {
             orderDao.addOrder(order);
+            
         }
         return order;
     }
@@ -41,7 +43,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
     @Override
     public void removeOrder(LocalDate date, int orderNumber) throws FMPersistenceException {
         orderDao.removeOrder(date, orderNumber);
-        auditDao.writeAuditEntry("Order " + orderNumber + "of " + date + " Removed.");
+        auditDao.writeAuditEntry("Order  " + orderNumber + " of " + date + " Removed.");
     }
 
     @Override

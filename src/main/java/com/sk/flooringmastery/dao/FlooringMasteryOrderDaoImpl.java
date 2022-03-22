@@ -38,15 +38,16 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     public Order addOrder(Order order) {
         int num = (order.getOrderNumber() + 1); // So initial Order starts at 1 and not 0
         order.setOrderNumber(num);
-        LocalDate date = order.getTimeStamp();
+       
         try {
-           readOrder(date);
+          // readOrder(date);
+          // readOrder(order.getTimeStamp());
             for (Order id : orders) {
                 if (id.getOrderNumber() == order.getOrderNumber()) {
                     order.setOrderNumber(id.getOrderNumber() + 1);
                 }
             }
-            
+             LocalDate date = order.getTimeStamp();
             orders.add(order);
             writeOrder(date, orders);
         } catch (FMPersistenceException ex) {
@@ -106,7 +107,7 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     private List<Order> readOrder(LocalDate date) throws FMPersistenceException {
 
-        String  fileDate  = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
+         String  fileDate  = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
          File ITEM_FILE = new File(String.format(dataFolder + "Orders_" + fileDate));
 
         Scanner scanner;
@@ -118,7 +119,7 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
                             new FileReader(ITEM_FILE)));
         } catch (FileNotFoundException e) {
             throw new FMPersistenceException(
-                    "-_- Could not Load Orders.", e);
+                    " Could not Load Orders.", e);
         }
         String currentLine;
 

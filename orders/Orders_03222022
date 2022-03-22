@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+5::Acme Inc.::TX::0::Laminate::110.00::1.75::2.10::192.50::231.00::0.00::423.50::03/22/2022
