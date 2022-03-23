@@ -1,0 +1,27 @@
+Order data of file Orders_03142022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Sima Inc.::CA::0.059999999999999997779553950749686919152736663818359375::Wood::25::5.1500000000000003552713678800500929355621337890625::4.75::128.75::118.75::14.8499999999999996447286321199499070644378662109375::262.3500000000000227373675443232059478759765625::03/14/2022
+2::Yuva::WA::0.06750000000000000444089209850062616169452667236328125::Carpet::20::2.25::2.100000000000000088817841970012523233890533447265625::56.25::52.5::7.339999999999999857891452847979962825775146484375::126.090000000000003410605131648480892181396484375::03/14/2022
+Order data of file Orders_03152022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Ada Lovelace::CA::25.00::Tile::249.00::3.50::4.15::871.50::1033.35::476.21::2381.0625::03/15/2022
+Order data of file Orders_03162022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Wida::WA::9.25::Wood::243.00::5.15::4.75::1251.45::1154.25::222.53::2628.227250::03/16/2022
+3::Acme Inc.::CA::0::Tile::240.00::3.50::4.15::840.00::996.00::0.00::1836.00::03/16/2022
+Order data of file Orders_03182022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Wida::WA::9.25::Wood::243.00::5.15::4.75::1251.45::1154.25::222.53::2628.227250::03/16/2022
+2::Yuva::WA::0::Wood::230.00::5.15::4.75::1184.50::1092.50::0.00::2277.00::03/16/2022
+Order data of file Orders_03222022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+5::Acme Inc.::TX::0::Laminate::110.00::1.75::2.10::192.50::231.00::0.00::423.50::03/22/2022
+Order data of file Orders_03232022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Niva::WA::0::Carpet::100.00::2.25::2.10::225.00::210.00::0.00::435.00::03/23/2022
+2::Grace::WA::0::Tile::210.00::3.50::4.15::735.00::871.50::0.00::1606.50::03/23/2022
+3::Siddhi::CA::0::Carpet::100.00::2.25::2.10::225.00::210.00::0.00::435.00::03/23/2022
+Order data of file Orders_03242022
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1::Gira::TX::4.45::Wood::230.00::5.15::4.75::1184.50::1092.50::101.33::2378.326500::03/24/2022
+2::Michelle::WA::9.25::Carpet::300.00::2.25::2.10::675.00::630.00::120.71::1425.712500::03/24/2022

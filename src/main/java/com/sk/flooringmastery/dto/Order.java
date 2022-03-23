@@ -11,7 +11,7 @@ public class Order {
 
     private int orderNumber;
     private String customerName;
-    private String state = tax.getState();
+    private String state;
     private String stateName = tax.getStateName();
     private BigDecimal taxRate = tax.getTaxRate();
     private String productType = product.getProductType();

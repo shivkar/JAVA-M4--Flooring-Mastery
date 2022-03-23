@@ -11,9 +11,12 @@ import java.util.List;
 public class FlooringMasteryOrderDaoStub implements FlooringMasteryOrderDao {
 
     LocalDate date = LocalDate.of(2022, Month.MARCH, 14);
+   
     private Order currentOrder;
 
     List<Order> orderList = new ArrayList<>();
+    
+    private Order onlyOrder;
 
     public Order stubOrder() {
 
@@ -80,4 +83,10 @@ public class FlooringMasteryOrderDaoStub implements FlooringMasteryOrderDao {
     public void editOrder(LocalDate date ,Order order) {
 
     }
+    
+    
+       
+       
+
+    
 }

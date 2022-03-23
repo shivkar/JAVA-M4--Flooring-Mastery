@@ -30,12 +30,12 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
         this.auditDao = auditDao;
     }
 
-    public Order addOrder(Order order) throws FMPersistenceException {
+    public Order addOrder(Order order) throws FMPersistenceException,CustomernamenullvalidationException {
         if (order.getCustomerName().equals("")) {
-            throw new FMPersistenceException("You must Enter a Customer Name!");
+            throw new CustomernamenullvalidationException("You must Enter a Customer Name!");
         } else {
             orderDao.addOrder(order);
-            
+
         }
         return order;
     }
@@ -57,13 +57,15 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
     }
 
     @Override
-    public void editOrder(LocalDate date, Order order) throws FMPersistenceException {
+    public void editOrder(LocalDate date, Order order) throws FMPersistenceException,CustomernamenullvalidationException {
         if (order.getCustomerName().equals("")) {
-            throw new FMPersistenceException("You must Enter a Customer Name!");
+            throw new CustomernamenullvalidationException ("You must Enter a Customer Name!");
         } else {
             orderDao.editOrder(date, order);
         }
     }
+
+    
 
     @Override
     public Order calculateCost(Order order) throws FMPersistenceException {
@@ -76,7 +78,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
         if (area.compareTo(BigDecimal.ZERO) >= 0) {
 
             for (Tax t : taxes) {
-                if (t.getStateName().equals(order.getStateName())) {
+                if (t.getState().equals(order.getState())) {
                     taxRate = t.getTaxRate();
                 }
             }

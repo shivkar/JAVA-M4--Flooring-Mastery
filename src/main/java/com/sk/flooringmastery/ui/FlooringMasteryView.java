@@ -23,6 +23,7 @@ public class FlooringMasteryView {
         io.print("2. Add an Order");
         io.print("3. Edit an Order");
         io.print("4. Remove an Order");
+
         io.print("5. Exit");
         io.print("****************");
 
@@ -59,7 +60,7 @@ public class FlooringMasteryView {
     }
 
     public Order editOrder(Order order) {
-        
+
         BigDecimal zero = BigDecimal.ZERO;
 
         System.out.println("Leave Blank if no Changes are Needed");
@@ -68,7 +69,7 @@ public class FlooringMasteryView {
         String state = io.readOptionalState("Change Location To? " + stateNames);
         String productType = io.readOptionalProduct("Change Product Type To? " + types);
         BigDecimal area = io.readOptionalBigDecimal("Change Area of Project?");
-        
+
         if (customerName.equals("")) {
             customerName = order.getCustomerName();
         } else {
@@ -89,7 +90,7 @@ public class FlooringMasteryView {
         } else {
             order.setArea(area);
         }
-       
+
         return order;
     }
 
@@ -99,7 +100,7 @@ public class FlooringMasteryView {
         String state = io.readState("Please enter the State of Where the Sale is Occuring " + stateNames);
         String productType = io.readProduct("Please enter the Product Type " + types);
         BigDecimal area = io.readBigDecimal("Please enter the Area in SqFeet that you want to Cover");
-         LocalDate time = LocalDate.now().plusDays(1);
+        LocalDate time = LocalDate.now().plusDays(1);
 
         Order currentOrder = new Order();
 
@@ -127,6 +128,20 @@ public class FlooringMasteryView {
             }
         }
         System.out.println("\n");
+    }
+
+    public void exportAllData(List<Order> orderList) {
+
+        for (Order currentOrder : orderList) {
+            String orderInfo = String.format("#%s : %s %s",
+                    currentOrder.getOrderNumber());
+            currentOrder.getState();
+            currentOrder.getProductType();
+            currentOrder.getArea();
+            currentOrder.getTimeStamp();
+            io.print(orderInfo);
+        }
+        io.readString("Please hit enter to continue.");
     }
 
     public void orderSuccesfullBanner() {
@@ -158,8 +173,22 @@ public class FlooringMasteryView {
         System.out.println("Your Order Has Been Successfully Updated.");
     }
 
+    public void orderExportsucessBanner() {
+        System.out.println("Hey ! Exported all data successfully ! Thanks for visiting !");
+        System.out.println("\n");
+    }
+
     public void orderNotSavedBanner() {
         System.out.println("Order not Saved, Returning To Main Menu!");
         System.out.println("\n");
     }
-}
+
+    public String  exitMessage() {
+        
+        String exitMessage = io.readString("Do you want to export all data ? Y or N!");
+        return exitMessage;
+    }
+
+       
+    }
+

@@ -64,7 +64,7 @@ public class FlooringMasteryServiceLayerImplTest {
     }
 
     @Test
-    public void testCustomerNameNull() throws FMPersistenceException {
+    public void testCustomerNameNull() throws FMPersistenceException, CustomernamenullvalidationException {
    // ARRANGE
         List<Order> itemList = dao1.searchOrders(date);
         Order stubOrder = new Order();

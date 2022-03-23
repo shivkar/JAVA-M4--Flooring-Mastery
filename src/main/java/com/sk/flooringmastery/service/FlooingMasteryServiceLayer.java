@@ -19,25 +19,20 @@ import java.util.List;
  *
  * @author SHIVALI
  */
-public interface  FlooingMasteryServiceLayer {
-    
-     Order addOrder(Order order) throws FMPersistenceException ;
-    
-     void removeOrder(LocalDate date, int orderNumber) throws FMPersistenceException ;
+public interface FlooingMasteryServiceLayer {
 
-    List<Order> searchOrders(LocalDate date); 
+    Order addOrder(Order order) throws FMPersistenceException,CustomernamenullvalidationException;
 
-    Order getOrder(List<Order> orderList, int orderNumber)throws FMPersistenceException  ;
-    
+    void removeOrder(LocalDate date, int orderNumber) throws FMPersistenceException;
 
-     void editOrder(LocalDate date, Order order) throws FMPersistenceException ;
-        
-    
+    List<Order> searchOrders(LocalDate date);
+
+    Order getOrder(List<Order> orderList, int orderNumber) throws FMPersistenceException;
+
+    void editOrder(LocalDate date, Order order) throws FMPersistenceException,CustomernamenullvalidationException;
 
     Order calculateCost(Order order) throws FMPersistenceException ;
 
-        
-
-       
     
+
 }

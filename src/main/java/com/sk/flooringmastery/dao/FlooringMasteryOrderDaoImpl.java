@@ -1,6 +1,7 @@
 package com.sk.flooringmastery.dao;
 
 import com.sk.flooringmastery.dto.Order;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
@@ -24,9 +27,9 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     private List<Order> orders = new ArrayList<>();
     private String dataFolder = "orders/";// TO MAKE ORDER FOLDER 
-    
-    
-   
+    private Object order;
+    private LocalDate date;
+
     public FlooringMasteryOrderDaoImpl() {
     }
 
@@ -38,16 +41,16 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     public Order addOrder(Order order) {
         int num = (order.getOrderNumber() + 1); // So initial Order starts at 1 and not 0
         order.setOrderNumber(num);
-       
+
         try {
-          // readOrder(date);
-          // readOrder(order.getTimeStamp());
+            // readOrder(date);
+            // readOrder(order.getTimeStamp());
             for (Order id : orders) {
                 if (id.getOrderNumber() == order.getOrderNumber()) {
                     order.setOrderNumber(id.getOrderNumber() + 1);
                 }
             }
-             LocalDate date = order.getTimeStamp();
+            LocalDate date = order.getTimeStamp();
             orders.add(order);
             writeOrder(date, orders);
         } catch (FMPersistenceException ex) {
@@ -96,8 +99,8 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     }
 
     @Override
-    public void editOrder(LocalDate date ,Order order) {
-         
+    public void editOrder(LocalDate date, Order order) {
+
         try {
             writeOrder(date, orders);
         } catch (FMPersistenceException ex) {
@@ -105,10 +108,12 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
         }
     }
 
+    
+
     private List<Order> readOrder(LocalDate date) throws FMPersistenceException {
 
-         String  fileDate  = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
-         File ITEM_FILE = new File(String.format(dataFolder + "Orders_" + fileDate));
+        String fileDate = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
+        File ITEM_FILE = new File(String.format(dataFolder + "Orders_" + fileDate));
 
         Scanner scanner;
 
@@ -174,8 +179,8 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     private void writeOrder(LocalDate date, List<Order> completedOrders) throws FMPersistenceException {
 
-        String  fileDate  = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
-         File ITEM_FILE = new File(String.format(dataFolder + "Orders_" + fileDate));
+        String fileDate = date.format(DateTimeFormatter.ofPattern("MMddyyyy"));
+        File ITEM_FILE = new File(String.format(dataFolder + "Orders_" + fileDate));
         PrintWriter out;
 
         try {
