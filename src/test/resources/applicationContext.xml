@@ -23,8 +23,7 @@
    <bean id="OrderStub" 
          class="com.sk.flooringmastery.dao.FlooringMasteryOrderDaoStub"/>
    
-   <bean id="OrderStub" 
-         class="com.sk.flooringmastery.dao.FlooringMasteryOrderStub"/>
+   
    
     <bean id="ProductDao" 
          class="com.sk.flooringmastery.dao.FlooringMasteryProductDaoImpl"/>

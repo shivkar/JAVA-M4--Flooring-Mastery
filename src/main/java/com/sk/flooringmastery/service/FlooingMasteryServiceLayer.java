@@ -25,9 +25,9 @@ public interface FlooingMasteryServiceLayer {
 
     void removeOrder(LocalDate date, int orderNumber) throws FMPersistenceException;
 
-    List<Order> searchOrders(LocalDate date);
-
-    Order getOrder(List<Order> orderList, int orderNumber) throws FMPersistenceException;
+    List<Order> searchOrders(LocalDate date) throws  OrderNotFoundException;
+ 
+    Order getOrder(List<Order> orderList, int orderNumber) throws FMPersistenceException, OrderNotFoundException;
 
     void editOrder(LocalDate date, Order order) throws FMPersistenceException,CustomernamenullvalidationException;
 

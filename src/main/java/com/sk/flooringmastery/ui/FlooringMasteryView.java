@@ -23,7 +23,6 @@ public class FlooringMasteryView {
         io.print("2. Add an Order");
         io.print("3. Edit an Order");
         io.print("4. Remove an Order");
-
         io.print("5. Exit");
         io.print("****************");
 

@@ -8,7 +8,6 @@ import com.sk.flooringmastery.dao.FlooringMasteryTaxDao;
 import com.sk.flooringmastery.dto.Order;
 import com.sk.flooringmastery.dto.Product;
 import com.sk.flooringmastery.dto.Tax;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_DOWN;
 import static java.math.RoundingMode.HALF_UP;
@@ -47,26 +46,45 @@ public class FlooringMasteryServiceLayerImpl implements FlooingMasteryServiceLay
     }
 
     @Override
-    public List<Order> searchOrders(LocalDate date) {
+    public List<Order> searchOrders(LocalDate date) throws  OrderNotFoundException {
+        List<Order> orders = orderDao.searchOrders(date);
+        if (orders.isEmpty()){
+            throw new OrderNotFoundException (" No order found for this date");
+        }
         return orderDao.searchOrders(date);
     }
 
     @Override
-    public Order getOrder(List<Order> orderList, int orderNumber) {
+    public Order getOrder(List<Order> orderList, int orderNumber) throws OrderNotFoundException {
+        
+        Order order = orderDao.getOrder(orderList, orderNumber);
+        if(order == null){throw new OrderNotFoundException (" Ordernumber  " + orderNumber + " does not exist." );
+                
+                }
         return orderDao.getOrder(orderList, orderNumber);
     }
 
     @Override
-    public void editOrder(LocalDate date, Order order) throws FMPersistenceException,CustomernamenullvalidationException {
+    public void editOrder(LocalDate date, Order order) throws FMPersistenceException,CustomernamenullvalidationException 
+    
+    {
         if (order.getCustomerName().equals("")) {
             throw new CustomernamenullvalidationException ("You must Enter a Customer Name!");
         } else {
             orderDao.editOrder(date, order);
+            auditDao.writeAuditEntry("Order  of " + date + " edited.");
         }
+        
+        /**if (!order.getTimeStamp().isBefore(date)|| order.getTimeStamp().equals("")) {
+            throw new ValidorderdateException ("Order not found for this date");
+        } else {
+            orderDao.editOrder(date, order);
+            auditDao.writeAuditEntry("Order  of " + date + " edited.");
+        }**/
     }
 
     
-
+     
     @Override
     public Order calculateCost(Order order) throws FMPersistenceException {
 

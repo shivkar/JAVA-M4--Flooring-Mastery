@@ -1,7 +1,6 @@
 package com.sk.flooringmastery.dao;
 
 import com.sk.flooringmastery.dto.Order;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,8 +14,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
@@ -28,7 +25,7 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
     private List<Order> orders = new ArrayList<>();
     private String dataFolder = "orders/";// TO MAKE ORDER FOLDER 
     private Object order;
-    private LocalDate date;
+    // private LocalDate date;
 
     public FlooringMasteryOrderDaoImpl() {
     }
@@ -39,18 +36,24 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     @Override
     public Order addOrder(Order order) {
-        int num = (order.getOrderNumber() + 1); // So initial Order starts at 1 and not 0
-        order.setOrderNumber(num);
-
+       // int num = (order.getOrderNumber() + 1); // So initial Order starts at 1 and not 0
+       // order.setOrderNumber(num);
+        LocalDate date = order.getTimeStamp();
         try {
-            // readOrder(date);
-            // readOrder(order.getTimeStamp());
+            readOrder(date);
+           // readOrder(order.getTimeStamp());
+           int num = 0 ;
             for (Order id : orders) {
-                if (id.getOrderNumber() == order.getOrderNumber()) {
-                    order.setOrderNumber(id.getOrderNumber() + 1);
+               
+                if (id.getOrderNumber() > num ) {
+                   // order.setOrderNumber(id.getOrderNumber() + 1);
+                   num = id.getOrderNumber();
                 }
+                
             }
-            LocalDate date = order.getTimeStamp();
+            order.setOrderNumber(num +1);
+            
+
             orders.add(order);
             writeOrder(date, orders);
         } catch (FMPersistenceException ex) {
@@ -61,7 +64,7 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
 
     @Override
     public Order getOrder(List<Order> orderList, int orderNumber) {
-        Order updatedOrder = new Order();
+        Order updatedOrder = null;
         for (Order order : orderList) {
             if (orderNumber == order.getOrderNumber()) {
                 updatedOrder = order;
@@ -75,7 +78,8 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
         try {
             readOrder(date);
         } catch (FMPersistenceException ex) {
-            System.out.println("Could Not Find Orders");
+
+            return new ArrayList<>();
         }
         return new ArrayList<>(orders);
     }
@@ -107,8 +111,6 @@ public class FlooringMasteryOrderDaoImpl implements FlooringMasteryOrderDao {
             System.out.println("Order Not Updated!");
         }
     }
-
-    
 
     private List<Order> readOrder(LocalDate date) throws FMPersistenceException {
 

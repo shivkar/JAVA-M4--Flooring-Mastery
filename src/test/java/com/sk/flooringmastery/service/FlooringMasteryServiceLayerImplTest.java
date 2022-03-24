@@ -41,6 +41,8 @@ public class FlooringMasteryServiceLayerImplTest {
             dao1.removeOrder(date, order.getOrderNumber());
         }
     }
+    
+    
 
     @Test
     public void testAreaLessThanZero() throws FMPersistenceException {
@@ -79,9 +81,44 @@ public class FlooringMasteryServiceLayerImplTest {
             service.addOrder(stubOrder);
    // ASSERT
             fail("Expected Exception was not thrown.");
-        } catch (FMPersistenceException ex) {
+        } catch (CustomernamenullvalidationException ex) {
 
         }
 
+    }
+    
+    @Test
+    
+    public void testOrderNotFound() throws FMPersistenceException, OrderNotFoundException {
+        
+        //ARRANGE 
+        
+        List<Order> itemList = dao1.searchOrders(date);
+        Order stubOrder = new Order();
+        BigDecimal area = new BigDecimal(25);
+        
+        stubOrder.setCustomerName("GIRA");
+        stubOrder.setOrderNumber(6);
+        stubOrder.setState("KY");
+        stubOrder.setProductType("Wood");
+        stubOrder.setArea(area);
+        
+        // ACT
+        try {
+            List<Order> orders = service.searchOrders(date);
+            service.getOrder(orders,6);
+            
+       // ASSERT
+            fail("Expected Exception was not thrown.");
+        } catch (OrderNotFoundException  ex) {
+             return ;
+
+        }
+        
+        
+        
+        
+        
+        
     }
 }

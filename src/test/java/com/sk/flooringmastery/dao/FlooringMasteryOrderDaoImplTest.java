@@ -13,8 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FlooringMasteryOrderDaoImplTest {
-
-    FlooringMasteryOrderDao dao = new FlooringMasteryOrderDaoImpl();
+    
+    FlooringMasteryOrderDao dao = new FlooringMasteryOrderDaoImpl("Test/");
     private Order firstOrder;
     private Order secondOrder;
     private List<Order> orderList = new ArrayList<>();

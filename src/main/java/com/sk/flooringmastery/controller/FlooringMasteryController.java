@@ -4,6 +4,8 @@ import com.sk.flooringmastery.dao.FMPersistenceException;
 import com.sk.flooringmastery.dto.Order;
 import com.sk.flooringmastery.service.CustomernamenullvalidationException;
 import com.sk.flooringmastery.service.FlooringMasteryServiceLayerImpl;
+import com.sk.flooringmastery.service.OrderNotFoundException;
+
 import com.sk.flooringmastery.ui.FlooringMasteryView;
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,8 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FlooringMasteryController {
 
@@ -30,9 +30,10 @@ public class FlooringMasteryController {
 
         boolean keepGoing = true;
         int menuSelection = 0;
-        try {
-            System.out.println("\n");
-            while (keepGoing) {
+        while (keepGoing) {
+
+            try {
+                System.out.println("\n");
 
                 menuSelection = getMenuSelection();
 
@@ -52,16 +53,18 @@ public class FlooringMasteryController {
 
                     case 5:
                         keepGoing = false;
+                        
+                     exitMessage();
                         break;
+                        
                     default:
                         unknownCommand();
                 }
-
+               
+            } catch (FMPersistenceException | OrderNotFoundException e) {
+                System.out.println(e.getMessage());
             }
 
-            exitMessage();
-        } catch (FMPersistenceException e) {
-            System.out.println("ERROR" + e);
         }
     }
 
@@ -69,7 +72,7 @@ public class FlooringMasteryController {
         return view.getSelection();
     }
 
-    private void searchOrders() {
+    private void searchOrders() throws OrderNotFoundException {
         view.SearchBanner();
         LocalDate date = view.getDate();
         List<Order> orderedDates = service.searchOrders(date);
@@ -97,12 +100,13 @@ public class FlooringMasteryController {
         }
     }
 
-    private void editOrder() throws FMPersistenceException {
+    private void editOrder() throws FMPersistenceException, OrderNotFoundException {
         try {
             view.editBanner();
             LocalDate date = view.getDate();
-            int orderNumber = view.getOrderNum();
+           // int orderNumber = view.getOrderNum();
             List<Order> orderedDates = service.searchOrders(date);
+            int orderNumber = view.getOrderNum();
             Order updated = service.getOrder(orderedDates, orderNumber);
             Order updatedOrder = view.editOrder(updated);
             Order finalOrder = service.calculateCost(updatedOrder);
@@ -132,7 +136,7 @@ public class FlooringMasteryController {
         System.out.println("Unknown Command! Please Enter a Valid Selection");
     }
 
-    private void exitMessage() throws FMPersistenceException  {
+    private void exitMessage() throws FMPersistenceException {
 
         String exitMessage = view.exitMessage();
         if (exitMessage.equals("Y")) {
@@ -145,7 +149,7 @@ public class FlooringMasteryController {
             try {
                 pw = new PrintWriter("Databackup/Exporteddata.txt");
             } catch (FileNotFoundException ex) {
-                throw new FMPersistenceException ("Error occured while writing to file",  ex);
+                throw new FMPersistenceException("Error occured while writing to file", ex);
             }
 
             // Get list of all the files in form of String Array
@@ -165,7 +169,7 @@ public class FlooringMasteryController {
                 try {
                     br = new BufferedReader(new FileReader(f));
                 } catch (FileNotFoundException ex) {
-                    throw new FMPersistenceException ("Could not read files from folder" , ex);
+                    throw new FMPersistenceException("Could not read files from folder", ex);
                 }
                 pw.println("Order data of file " + fileName);
 
@@ -174,7 +178,7 @@ public class FlooringMasteryController {
                 try {
                     line = br.readLine();
                 } catch (IOException ex) {
-                    throw new FMPersistenceException ("Could not read files from folder" ,  ex);
+                    throw new FMPersistenceException("Could not read files from folder", ex);
                 }
                 while (line != null) {
 
@@ -183,14 +187,14 @@ public class FlooringMasteryController {
                     try {
                         line = br.readLine();
                     } catch (IOException ex) {
-                        throw new FMPersistenceException ("Error!", ex);
+                        throw new FMPersistenceException("Error!", ex);
                     }
                 }
                 pw.flush();
             }
             System.out.println("Exported  from all files"
-                    + " in folder :  " + dir.getName() );
-            
+                    + " in folder :  " + dir.getName());
+
             System.out.println(" ");
 
             view.orderExportsucessBanner();

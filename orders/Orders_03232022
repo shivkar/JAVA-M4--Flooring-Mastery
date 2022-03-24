@@ -1,4 +1,2 @@
 OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost,PerSquareFoot,MaterialCost,LaborCost,Tax,Total
-1::Niva::WA::0::Carpet::100.00::2.25::2.10::225.00::210.00::0.00::435.00::03/23/2022
-2::Grace::WA::0::Tile::210.00::3.50::4.15::735.00::871.50::0.00::1606.50::03/23/2022
-3::Siddhi::CA::0::Carpet::100.00::2.25::2.10::225.00::210.00::0.00::435.00::03/23/2022
+2::Zoya::WA::9.25::Tile::210.00::3.50::4.15::735.00::871.50::148.60::1755.101250::03/23/2022

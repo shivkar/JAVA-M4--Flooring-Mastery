@@ -3,6 +3,7 @@ package com.sk.flooringmastery.ui;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO {
@@ -103,8 +104,8 @@ public class UserIOConsoleImpl implements UserIO {
                 value = readString(prompt);
                 result = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 isValid = true;
-            } catch (NumberFormatException ex) {
-                System.out.printf("The value '%s' is not a Date. \n", ex);
+            } catch (DateTimeParseException ex) {
+                System.out.printf("The value '%s' is not a Date. \n", value);
             }
         } while (!isValid);
         return result;
